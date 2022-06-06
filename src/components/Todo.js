@@ -20,7 +20,7 @@ import { getKey } from "../lib/util";
 import NewTodo from "./NewTodo";
 
 function Todo(props) {
-	const [items, putItems] = React.useState([
+	const [items, putItems] = useState([
 		/* テストコード 開始 */
 		{ key: getKey(), text: "日本語の宿題", done: false },
 		{ key: getKey(), text: "reactを勉強する", done: false },
@@ -28,13 +28,12 @@ function Todo(props) {
 		/* テストコード 終了 */
 	]);
     const handleAddNewTodo = (inputValue) => {
-        var items_var = items
-        items_var.push({
+        const new_items = [...items, {
 			key: getKey(),
 			text: inputValue,
 			done: false,
-		});
-        putItems(items_var)
+		}]
+		putItems(new_items)
     }
 
 	return (
