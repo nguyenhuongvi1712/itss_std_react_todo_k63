@@ -6,7 +6,14 @@
 */
 function Filter(  ) {
   return (
-    <div className="panel-tabs">
+    <div className="panel-tabs mb-4">
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active"><a>全て</a></li>
+          <li><a>未完了</a></li>
+          <li><a>完了済</a></li>
+        </ul>
+      </div>
     </div>
   );
 }
