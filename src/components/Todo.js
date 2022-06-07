@@ -17,7 +17,6 @@ import useStorage from "../hooks/storage";
 
 /* ライブラリ */
 import { getKey } from "../lib/util";
-import NewTodo from "./NewTodo";
 
 function Todo(props) {
 	const [items, putItems] = useState([
@@ -38,13 +37,10 @@ function Todo(props) {
 
 	return (
 		<div className="panel">
-			<NewTodo onAddNewTodo={handleAddNewTodo}></NewTodo>
+			<Input onAddNewTodo={handleAddNewTodo}></Input>
+			<Filter></Filter>
 			<div className="panel-heading">ITSS ToDoアプリ</div>
 			{items.map((item) => (
-				// <label className="panel-block">
-				//     <input type="checkbox" />
-				//     {item.text}
-				// </label>
 				<TodoItem item={item} key={item.key} />
 			))}
 			<div className="panel-block">{items.length} items</div>

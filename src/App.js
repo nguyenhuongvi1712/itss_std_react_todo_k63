@@ -5,7 +5,6 @@ import "./styles/main.css";
 
 /* コンポーネント */
 import Todo from "./components/Todo";
-import NewTodo from "./components/NewTodo";
 import { getKey } from "./lib/util";
 
 function App() {
