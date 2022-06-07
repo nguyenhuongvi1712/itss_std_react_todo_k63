@@ -8,6 +8,7 @@ import React, { useState } from "react";
 function TodoItem(props) {
 	const [customClass, setCustomClass] = useState("panel-block");
 	const handleOnChange = (event) => {
+		props.onChangeStatus(props.item.key)
 		if(event.target.checked)
 			setCustomClass("panel-block has-text-grey-light");
 		else
@@ -15,7 +16,7 @@ function TodoItem(props) {
 	};
 	return (
 		<label className={customClass}>
-			<input type="checkbox" onChange={handleOnChange}/>
+			<input type="checkbox" onChange={handleOnChange} checked={props.item.done}/>
 			{props.item.text}
 		</label>
 	);

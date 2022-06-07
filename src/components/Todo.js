@@ -26,6 +26,14 @@ function Todo(props) {
 		{ key: getKey(), text: "明日の準備をする", done: false },
 		/* テストコード 終了 */
 	]);
+	const [filter, setFilter] = React.useState('ALL');
+
+	const displayItems = items.filter(item => {
+		if (filter === 'ALL') return true;
+		if (filter === 'TODO') return !item.done;
+		if (filter === 'DONE') return item.done;
+	});
+	const handleFilterChange = value => setFilter(value);
     const handleAddNewTodo = (inputValue) => {
         const new_items = [...items, {
 			key: getKey(),
@@ -33,17 +41,31 @@ function Todo(props) {
 			done: false,
 		}]
 		putItems(new_items)
-    }
+	}
+	const handleOnChangeStatus = (key) => {
+		let update_item,update_items
+		const existing_item_index = items.findIndex(e => e.key === key)
+		const existing_item = items[existing_item_index]
+		if (existing_item) {
+			update_item = {
+				...existing_item,
+				done: !existing_item.done
+			}
+			update_items = [...items]
+			update_items[existing_item_index] = update_item
+			putItems(update_items)
+		}
+	} 
 
 	return (
 		<div className="panel">
 			<Input onAddNewTodo={handleAddNewTodo}></Input>
-			<Filter></Filter>
+			<Filter onChange={handleFilterChange} value={filter}></Filter>
 			<div className="panel-heading">ITSS ToDoアプリ</div>
-			{items.map((item) => (
-				<TodoItem item={item} key={item.key} />
+			{displayItems.map((item) => (
+				<TodoItem item={item} key={item.key} onChangeStatus={handleOnChangeStatus}/>
 			))}
-			<div className="panel-block">{items.length} items</div>
+			<div className="panel-block">{displayItems.length} items</div>
 		</div>
 	);
 }
